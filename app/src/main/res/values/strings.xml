@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Debtor</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="debtor">Должники</string>
+    <string name="main">Главная</string>
+    <string name="history">История</string>
+    <string name="setting">Настройки</string>
+    <string name="about">О разработчиках</string>
+</resources>
