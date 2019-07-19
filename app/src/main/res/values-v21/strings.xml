@@ -4,4 +4,6 @@
     <string name="history">История</string>
     <string name="setting">Настройки</string>
     <string name="about">О разработчиках</string>
+    <string name="owe_me">Мне должны</string>
+    <string name="peaple">Люди</string>
 </resources>
