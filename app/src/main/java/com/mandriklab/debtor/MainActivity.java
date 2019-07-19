@@ -1,5 +1,6 @@
 package com.mandriklab.debtor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,8 +24,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    ViewPager viewPager;
+    ViewPager viewPager, viewPagerCard;
     Adapter adapter;
+    AdapterCard adapterCard;
     List<Model> models;
     RecyclerView listView;
     @Override
@@ -38,8 +40,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+               startActivity(new Intent(getApplicationContext(),newDebitor.class));
             }
         });
 
@@ -57,25 +58,34 @@ public class MainActivity extends AppCompatActivity
         models.add(new Model(R.drawable.red_arrow,"Я должен","1234.45"));
 
         adapter = new Adapter(models,this);
+
+
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
-        viewPager.setPadding(50,0,30,0);
+        //viewPager.setPadding(0,0,0,0);
 
+        adapterCard = new AdapterCard(models,this);
+        viewPagerCard = findViewById(R.id.viewPagerCard);
+        viewPagerCard.setAdapter(adapterCard);
+        viewPagerCard.setPadding(40,0,20,0);
+        //viewPagerCard.
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        int CurrentItemCard=0;
+        viewPagerCard.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-                if(i<adapter.getCount()-1){
 
-                }
-                else {
-
-                }
             }
 
             @Override
             public void onPageSelected(int i) {
-
+                viewPager.setCurrentItem(i,true);
+                /*if (i==2){
+                    viewPagerCard.setPadding(40,0,20,0);
+                }
+                else {
+                    viewPagerCard.setPadding(40,0,0,0);
+                }*/
             }
 
             @Override
@@ -83,6 +93,23 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                viewPagerCard.setCurrentItem(i,true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
 
     }
 

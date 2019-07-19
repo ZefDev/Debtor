@@ -21,7 +21,7 @@ public class Adapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public Adapter(List<Model> models, Context context) {
+    public Adapter( List<Model> models, Context context) {
         this.models = models;
         this.context = context;
     }
@@ -41,16 +41,9 @@ public class Adapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = layoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item,container,false);
-        ImageView imageView;
-        TextView title,desc;
-        RecyclerView listView;
-        imageView = view.findViewById(R.id.image);
-        title = view.findViewById(R.id.title);
-        desc = view.findViewById(R.id.desc);
 
-        imageView.setImageResource(models.get(position).getImage());
-        title.setText(models.get(position).getTitle());
-        desc.setText(models.get(position).getDesc());
+        RecyclerView listView;
+
         listView = view.findViewById(R.id.dynamic);
         ArrayList<Persons> arr = new ArrayList<>();
         arr.add(new Persons(1,1,"","Сергей Должник","19.07.2019","8",11435.49));

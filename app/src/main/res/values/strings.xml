@@ -13,4 +13,10 @@
     <string name="about">О разработчиках</string>
     <string name="owe_me">Мне должны</string>
     <string name="peaple">Люди</string>
+    <string name="last_date">До</string>
+    <string name="how_much">Сколько</string>
+    <string name="who">Кто?</string>
+    <string name="debtor_my">Я должен</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
 </resources>
