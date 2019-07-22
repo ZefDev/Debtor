@@ -11,16 +11,29 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorBackground"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:fitsSystemWindows="true"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+        <ImageView
+            android:id="@+id/logoXmarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/debtor" />
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBackground2"
         android:orientation="vertical"
+        android:paddingTop="10dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
@@ -30,8 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:paddingTop="5dp"
+            android:paddingLeft="10dp"
             android:text="@string/peaple"
-            android:textSize="22sp"
+            android:textSize="24sp"
 
             android:textStyle="bold" />
 
@@ -47,15 +61,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:paddingRight="15dp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:background="@drawable/back_button"
-                    android:text="@string/owe_me"
                     android:elevation="5dp"
+                    android:text="@string/owe_me"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -64,12 +79,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:paddingLeft="15dp"
                 android:orientation="vertical">
 
                 <Button
                     android:id="@+id/button4"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:background="@drawable/back_button_lightblue"
                     android:elevation="5dp"
                     android:text="@string/debtor_my" />
@@ -100,7 +116,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:elevation="5dp"
-            android:text="Name"
+            android:text=""
             android:textSize="18sp" />
 
         <TextView
@@ -126,7 +142,7 @@
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Name" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tvNewNote4"
@@ -151,7 +167,7 @@
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Name" />
+            android:text="" />
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -180,35 +196,37 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingRight="15dp">
 
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/back_button"
-                    android:text="@string/save"
                     android:elevation="5dp"
+                    android:text="@string/save"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="15dp">
 
                 <Button
                     android:id="@+id/button6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/back_button_blue"
-                    android:text="@string/cancel"
                     android:elevation="5dp"
+                    android:text="@string/cancel"
                     android:textColor="@color/white" />
             </LinearLayout>
 

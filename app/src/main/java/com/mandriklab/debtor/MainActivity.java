@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setTitle("");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         adapterCard = new AdapterCard(models,this);
         viewPagerCard = findViewById(R.id.viewPagerCard);
         viewPagerCard.setAdapter(adapterCard);
-        viewPagerCard.setPadding(40,0,20,0);
+        //viewPagerCard.setPadding(40,0,20,0);
         //viewPagerCard.
 
         int CurrentItemCard=0;
