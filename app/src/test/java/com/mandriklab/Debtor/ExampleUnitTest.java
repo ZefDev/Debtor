@@ -1,4 +1,4 @@
-package com.mandriklab.debtor;
+package com.mandriklab.Debtor;
 
 import org.junit.Test;
 

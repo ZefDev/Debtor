@@ -1,6 +1,5 @@
-package com.mandriklab.debtor;
+package com.mandriklab.Debtor;
 
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +26,7 @@ public class newDebitor extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;

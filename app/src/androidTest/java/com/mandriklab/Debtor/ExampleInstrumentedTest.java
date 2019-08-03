@@ -1,4 +1,4 @@
-package com.mandriklab.debtor;
+package com.mandriklab.Debtor;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

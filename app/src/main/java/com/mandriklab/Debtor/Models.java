@@ -1,11 +1,11 @@
-package com.mandriklab.debtor;
+package com.mandriklab.Debtor;
 
-public class Model {
+public class Models {
     private int image;
     private String title;
     private String desc;
 
-    public Model(int image, String title, String desc) {
+    public Models(int image, String title, String desc) {
         this.image = image;
         this.title = title;
         this.desc = desc;
