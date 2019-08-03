@@ -1,4 +1,4 @@
-package com.mandriklab.Debtor;
+package com.mandriklab.Debtor.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.mandriklab.Debtor.Adapter;
+import com.mandriklab.Debtor.AdapterCard;
+import com.mandriklab.Debtor.Models;
+import com.mandriklab.Debtor.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(getApplicationContext(),newDebitor.class));
+               startActivity(new Intent(getApplicationContext(), newDebitor.class));
             }
         });
 
