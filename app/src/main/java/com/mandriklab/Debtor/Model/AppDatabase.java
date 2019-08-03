@@ -6,12 +6,10 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
-import android.util.Log;
 
 import com.mandriklab.Debtor.Model.DAO.DebtorsDao;
 import com.mandriklab.Debtor.Model.DAO.OperationDao;
 import com.mandriklab.Debtor.Model.Entity.Debtors;
-import com.mandriklab.Debtor.Model.Entity.Operation;
 
 
 @Database(entities = {Debtors.class, Operation.class}, version = 1)
