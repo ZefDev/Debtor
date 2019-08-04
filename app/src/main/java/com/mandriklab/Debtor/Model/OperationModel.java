@@ -43,6 +43,11 @@ public class OperationModel implements OperationDao {
     }
 
     @Override
+    public List<OperationWithDebtors> getOperationWithDebtors() {
+        return null;
+    }
+
+    @Override
     public Operation getById(int id) {
         return null;
     }
@@ -69,7 +74,7 @@ public class OperationModel implements OperationDao {
 
 
     public interface LoadOperationCallback {
-        void onLoad(List<Operation> operations);
+        void onLoad(List<OperationWithDebtors> operations);
     }
 
     public interface AddOperationCallback {
@@ -80,7 +85,7 @@ public class OperationModel implements OperationDao {
         void onComplete();
     }
 
-    class LoadOperation extends AsyncTask<Void, Void, List<Operation>> {
+    class LoadOperation extends AsyncTask<Void, Void, List<OperationWithDebtors>> {
 
         private final LoadOperationCallback callback;
 
@@ -88,13 +93,13 @@ public class OperationModel implements OperationDao {
             this.callback = callback;
         }
         @Override
-        protected List<Operation> doInBackground(Void... params) {
-            List<Operation> operation = operationDao.getAll();
+        protected List<OperationWithDebtors> doInBackground(Void... params) {
+            List<OperationWithDebtors> operation = operationDao.getOperationWithDebtors();
             return operation;
         }
 
         @Override
-        protected void onPostExecute(List<Operation> operation) {
+        protected void onPostExecute(List<OperationWithDebtors> operation) {
             if (callback != null) {
                 callback.onLoad(operation);
             }

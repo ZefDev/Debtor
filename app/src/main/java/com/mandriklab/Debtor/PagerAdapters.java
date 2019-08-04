@@ -9,17 +9,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mandriklab.Debtor.Model.Entity.Debtors;
+import com.mandriklab.Debtor.Model.Entity.Operation;
+import com.mandriklab.Debtor.Model.OperationWithDebtors;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class Adapter extends PagerAdapter {
-    private List<Models> models;
+public class PagerAdapters extends PagerAdapter {
+    private List<ModelCard> models;
     private LayoutInflater layoutInflater;
     private Context context;
+    private List<OperationWithDebtors> listOperation;
 
-    public Adapter(List<Models> models, Context context) {
+    public PagerAdapters(List<ModelCard> models, Context context, List<OperationWithDebtors> listOperation) {
         this.models = models;
         this.context = context;
+        this.listOperation = listOperation;
     }
 
     @Override
@@ -42,13 +52,30 @@ public class Adapter extends PagerAdapter {
 
         listView = view.findViewById(R.id.dynamic);
         ArrayList<Persons> arr = new ArrayList<>();
-        arr.add(new Persons(1,1,"","Сергей Должник","19.07.2019","8",11435.49));
-        arr.add(new Persons(2,1,"","Юра Должник","19.07.2019","9",1143.49));
-        arr.add(new Persons(3,1,"","Женя Должник","19.07.2019","1",11235.49));
-        arr.add(new Persons(4,1,"","Антон Должник","19.07.2019","4",9999.49));
-        arr.add(new Persons(5,1,"","ЮрГар Должник","19.07.2019","3",11496.49));
-        arr.add(new Persons(6,1,"","Сергей Должник","19.07.2019","5",15435.49));
+        for (int i=0;i<listOperation.size();i++){
+            Debtors deb = listOperation.get(i).debtors;
+            Operation operation = listOperation.get(i).operation;
 
+            int imgIndikator = 0;
+            if (operation.getSumma()>0){
+                imgIndikator = 1;
+            }
+            Date datemilisec=new Date();
+            long day = (operation.getLastDate() - datemilisec.getTime())/86400000;
+
+            String date = new SimpleDateFormat("dd.MM.yyyy").format(operation.getLastDate());
+
+            operation.getLastDate();
+            arr.add(new Persons(listOperation.get(i).debtors.getIdDebtor(),
+                    imgIndikator,
+                    "",
+                    deb.getFullName(),
+                    date,
+                    day+"",
+                    operation.getSumma()
+                    )
+            );
+        }
         // сдесь тип загрузиться адаптер
         listView.setAdapter(null);
         listView.setLayoutManager(new GridLayoutManager(context, 1));

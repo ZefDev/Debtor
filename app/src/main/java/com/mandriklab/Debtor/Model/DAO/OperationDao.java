@@ -8,6 +8,7 @@ import android.arch.persistence.room.Update;
 
 
 import com.mandriklab.Debtor.Model.Entity.Operation;
+import com.mandriklab.Debtor.Model.OperationWithDebtors;
 
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public interface OperationDao {
     @Query("SELECT * FROM Operation")
     List<Operation> getAll();
+
+    @Query("SELECT * FROM Operation")
+    List<OperationWithDebtors> getOperationWithDebtors();
 
     @Query("SELECT * FROM Operation WHERE idOperation =:id")
     Operation getById(int id);

@@ -12,11 +12,11 @@ import android.widget.TextView;
 import java.util.List;
 
 public class AdapterCard extends PagerAdapter {
-    private List<Models> models;
+    private List<ModelCard> models;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public AdapterCard(List<Models> models, Context context) {
+    public AdapterCard(List<ModelCard> models, Context context) {
         this.models = models;
         this.context = context;
     }

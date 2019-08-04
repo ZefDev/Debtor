@@ -15,25 +15,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mandriklab.Debtor.Adapter;
+import com.mandriklab.Debtor.Model.OperationWithDebtors;
+import com.mandriklab.Debtor.PagerAdapters;
 import com.mandriklab.Debtor.AdapterCard;
-import com.mandriklab.Debtor.Models;
+import com.mandriklab.Debtor.ModelCard;
 import com.mandriklab.Debtor.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager, viewPagerCard;
-    Adapter adapter;
+    PagerAdapters pagerAdapters;
     AdapterCard adapterCard;
-    List<Models> models;
+    List<ModelCard> models;
     RecyclerView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Init();
+    }
+
+    public void Init(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(getApplicationContext(), newDebitor.class));
+                startActivity(new Intent(getApplicationContext(), newDebitor.class));
             }
         });
 
@@ -53,24 +57,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        models = new ArrayList<>();
-        models.add(new Models(R.drawable.left_pointing_arrow,"Мне должны","11568.45"));
-        models.add(new Models(R.drawable.red_arrow,"Я должен","1234.45"));
-
-        adapter = new Adapter(models,this);
-
-
         viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-        //viewPager.setPadding(0,0,0,0);
-
-        adapterCard = new AdapterCard(models,this);
         viewPagerCard = findViewById(R.id.viewPagerCard);
-        viewPagerCard.setAdapter(adapterCard);
-        //viewPagerCard.setPadding(40,0,20,0);
-        //viewPagerCard.
+        //Эти две модели для карточек
 
+        //--------------
         int CurrentItemCard=0;
         viewPagerCard.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -81,12 +72,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageSelected(int i) {
                 viewPager.setCurrentItem(i,true);
-                /*if (i==2){
-                    viewPagerCard.setPadding(40,0,20,0);
-                }
-                else {
-                    viewPagerCard.setPadding(40,0,0,0);
-                }*/
             }
 
             @Override
@@ -111,7 +96,20 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
 
+    public void loadCardView(List<OperationWithDebtors> list){
+        models = new ArrayList<>();
+        models.add(new ModelCard(R.drawable.left_pointing_arrow,"Мне должны","11568.45"));
+        models.add(new ModelCard(R.drawable.red_arrow,"Я должен","1234.45"));
+        pagerAdapters = new PagerAdapters(models,this,list);
+        viewPager.setAdapter(pagerAdapters);
+        adapterCard = new AdapterCard(models,this);
+        viewPagerCard.setAdapter(adapterCard);
+    }
+
+    public void showList(List<OperationWithDebtors> list){
+        loadCardView(list);
     }
 
     @Override
@@ -133,23 +131,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
       /*  if (id == R.id.nav_camera) {
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

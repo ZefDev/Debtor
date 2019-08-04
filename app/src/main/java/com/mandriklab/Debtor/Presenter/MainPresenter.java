@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.mandriklab.Debtor.Model.Entity.Operation;
+import com.mandriklab.Debtor.Model.OperationModel;
+import com.mandriklab.Debtor.Model.OperationWithDebtors;
 import com.mandriklab.Debtor.View.MainActivity;
 
 import java.util.ArrayList;
@@ -17,22 +20,14 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MainPresenter {
     private MainActivity view;
-    //private SiteModel model;
-    //private NewsModel newsModel;
-    private GroupSitesModel groupSitesModel;
-    //ArrayList<Site> listSites;
-    //ArrayList<GroupSites> groupSites;
+    private OperationModel operationModel;
+    ArrayList<Operation> listOperation;
     private SharedPreferences sPref;
 
-    String isNotify = "isNotify";
-    String isLoadImage ="isLoadImage";
-    public static int SELECT_OPML_DIALOG=999;
 
-
-    public MainPresenter(SiteModel model, NewsModel newsModel,GroupSitesModel groupSitesModel ){
-        this.model = model;
-        this.newsModel = newsModel;
-        this.groupSitesModel = groupSitesModel;
+    public MainPresenter(OperationModel model, ArrayList<Operation> listOperation ){
+        this.operationModel = model;
+        this.listOperation = listOperation;
     }
 
     public void attachView(MainActivity mainActivity) {
@@ -44,35 +39,24 @@ public class MainPresenter {
     }
 
     public void viewIsReady() {
-        listSites = new ArrayList<>();
-        groupSites = new ArrayList<>();
-        loadSettings();
-        loadGroupSitesList();
-        loadNews(0,0);
-        loadNewsIsBookMark();
-
+        listOperation = new ArrayList<>();
+        loadOperation();
     }
 
+    public void loadOperation() {
+        //view.showProgressBar();
+        //loadSitesIsShow();
+        operationModel.loadOperation(new OperationModel.LoadOperationCallback() {
 
-
-    public void saveSettings(String tag,int value) {
-        sPref = view.getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt(tag, value);
-        ed.commit();
+            @Override
+            public void onLoad(List<OperationWithDebtors> operations) {
+                view.showList(operations);
+            }
+        });
     }
 
-    public void loadSettings() {
-        sPref = view.getPreferences(MODE_PRIVATE);
-        Boolean _isLoadImage = sPref.getBoolean(isLoadImage, false);
-        Boolean _isNotify = sPref.getBoolean(isNotify, false);
-        view.loadSettings(_isNotify,_isLoadImage);
-    }
-
-
-
-    public void updateNews(RssItem news) {
-        newsModel.updateNews(news,new NewsModel.CompleteCallback() {
+    public void updateOperation(Operation operation) {
+        operationModel.updateOperation(operation,new OperationModel.CompleteCallback() {
             @Override
             public void onComplete() {
 

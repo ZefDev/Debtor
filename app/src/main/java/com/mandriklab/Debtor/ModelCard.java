@@ -1,11 +1,11 @@
 package com.mandriklab.Debtor;
 
-public class Models {
+public class ModelCard {
     private int image;
     private String title;
     private String desc;
 
-    public Models(int image, String title, String desc) {
+    public ModelCard(int image, String title, String desc) {
         this.image = image;
         this.title = title;
         this.desc = desc;
