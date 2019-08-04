@@ -90,10 +90,6 @@ public class DebtorsModel implements DebtorsDao {
         }
         @Override
         protected List<Debtors> doInBackground(Void... params) {
-            Date d = new Date();
-            //SimpleDateFormat ft = new SimpleDateFormat ("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
-            //SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM hh:mm", Locale.ENGLISH);
-
             List<Debtors> debtors = debtorsDao.getAll();
             return debtors;
         }

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), newDebitor.class));
+                startActivity(new Intent(getApplicationContext(), AddOperationActivity.class));
             }
         });
 

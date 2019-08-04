@@ -6,10 +6,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mandriklab.Debtor.Model.DebtorsModel;
+import com.mandriklab.Debtor.Model.Entity.Debtors;
+import com.mandriklab.Debtor.Model.Entity.Operation;
+import com.mandriklab.Debtor.Model.OperationModel;
+import com.mandriklab.Debtor.Presenter.AddOperationPresenter;
+import com.mandriklab.Debtor.Presenter.MainPresenter;
 import com.mandriklab.Debtor.R;
 
-public class newDebitor extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class AddOperationActivity extends AppCompatActivity {
+
+    AddOperationPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +27,15 @@ public class newDebitor extends AppCompatActivity {
         setSupportActionBar(tn);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
+        DebtorsModel debtorsModel = new DebtorsModel(this);
+        OperationModel operationModel = new OperationModel(this);
+        presenter = new AddOperationPresenter(operationModel,debtorsModel);
+        presenter.attachView(this);
+        presenter.viewIsReady();
+    }
+
+    public void showListDebitor(ArrayList<Debtors> list){
+
     }
 
     @Override
