@@ -25,9 +25,9 @@ public class MainPresenter {
     private SharedPreferences sPref;
 
 
-    public MainPresenter(OperationModel model, ArrayList<Operation> listOperation ){
+    public MainPresenter(OperationModel model){
         this.operationModel = model;
-        this.listOperation = listOperation;
+       // this.listOperation = listOperation;
     }
 
     public void attachView(MainActivity mainActivity) {

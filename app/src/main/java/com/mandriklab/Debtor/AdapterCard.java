@@ -45,7 +45,7 @@ public class AdapterCard extends PagerAdapter {
 
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());
-        desc.setText(models.get(position).getDesc());
+        desc.setText(String.format("%.2f", Double.valueOf(models.get(position).getDesc())));
         container.addView(view, 0);
 
 

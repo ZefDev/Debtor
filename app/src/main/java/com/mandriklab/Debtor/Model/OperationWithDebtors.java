@@ -12,6 +12,6 @@ public class OperationWithDebtors {
     @Embedded
     public Operation operation;
 
-    @Relation(parentColumn = "id", entityColumn = "idDebtorOperation")
-    public Debtors debtors;
+    @Relation(parentColumn = "idDebtorOperation", entityColumn = "idDebtor")
+    public List<Debtors> debtors;
 }

@@ -52,29 +52,42 @@ public class PagerAdapters extends PagerAdapter {
 
         listView = view.findViewById(R.id.dynamic);
         ArrayList<Persons> arr = new ArrayList<>();
+        //Распределение всех долгов
         for (int i=0;i<listOperation.size();i++){
-            Debtors deb = listOperation.get(i).debtors;
+            Debtors deb =  listOperation.get(i).debtors.get(0);
             Operation operation = listOperation.get(i).operation;
 
             int imgIndikator = 0;
+
+            long day = (operation.getLastDate() - System.currentTimeMillis())/86400000;
+
+            String date = new SimpleDateFormat("dd.MM.yyyy").format(operation.getLastDate());
             if (operation.getSumma()>0){
                 imgIndikator = 1;
             }
-            Date datemilisec=new Date();
-            long day = (operation.getLastDate() - datemilisec.getTime())/86400000;
-
-            String date = new SimpleDateFormat("dd.MM.yyyy").format(operation.getLastDate());
-
-            operation.getLastDate();
-            arr.add(new Persons(listOperation.get(i).debtors.getIdDebtor(),
-                    imgIndikator,
-                    "",
-                    deb.getFullName(),
-                    date,
-                    day+"",
-                    operation.getSumma()
-                    )
-            );
+            //operation.getLastDate();
+            if (position==0 && operation.getSumma()>0) {
+                arr.add(new Persons(deb.getIdDebtor(),
+                                imgIndikator,
+                                "",
+                                deb.getFullName(),
+                                date,
+                                day + "",
+                                operation.getSumma()
+                        )
+                );
+            }
+            else if(position==1 && operation.getSumma()<0)  {
+                arr.add(new Persons(deb.getIdDebtor(),
+                                imgIndikator,
+                                "",
+                                deb.getFullName(),
+                                date,
+                                day + "",
+                                operation.getSumma()
+                        )
+                );
+            }
         }
         // сдесь тип загрузиться адаптер
         listView.setAdapter(null);

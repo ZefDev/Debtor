@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ViewHolder> implements View.OnClickListener {
@@ -45,13 +46,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         holder.tvNamePerson.setText(person.getNamePerson());
         holder.tvDate.setText(person.getDate());
         holder.tvDay.setText(person.getDay() + " дн.");
-        holder.tvCoast.setText(String.valueOf(person.getCoast()));
+        holder.tvCoast.setText( new DecimalFormat("#0.00").format(person.getCoast()));
 
         if (person.getImgIndikator()==1){
             holder.imgIndikator.setImageResource(R.drawable.left_pointing_arrow);
         }
         else {
-            holder.imgIndikator.setImageResource(R.drawable.red_arrow);
+            holder.imgIndikator.setImageResource(R.drawable.red_arrow_small);
+            holder.imgIndikator.setMaxWidth(50);
+            holder.imgIndikator.setMaxHeight(40);
         }
     }
 

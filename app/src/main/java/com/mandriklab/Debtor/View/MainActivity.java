@@ -15,10 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mandriklab.Debtor.Model.OperationModel;
 import com.mandriklab.Debtor.Model.OperationWithDebtors;
 import com.mandriklab.Debtor.PagerAdapters;
 import com.mandriklab.Debtor.AdapterCard;
 import com.mandriklab.Debtor.ModelCard;
+import com.mandriklab.Debtor.Presenter.MainPresenter;
 import com.mandriklab.Debtor.R;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AdapterCard adapterCard;
     List<ModelCard> models;
     RecyclerView listView;
+    MainPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +62,40 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         viewPager = findViewById(R.id.viewPager);
         viewPagerCard = findViewById(R.id.viewPagerCard);
-        //Эти две модели для карточек
 
-        //--------------
-        int CurrentItemCard=0;
+
+
+        OperationModel model = new OperationModel(this);
+        presenter = new MainPresenter(model);
+        presenter.attachView(this);
+        presenter.viewIsReady();
+
+    }
+
+    public void loadCardView(List<OperationWithDebtors> list){
+        double minus = 0;
+        double plus = 0;
+        // Подсчёт долгов и должников
+        for (int i=0;i<list.size();i++){
+            if(list.get(i).operation.getSumma()>0){
+                plus += list.get(i).operation.getSumma();
+            }
+            else {
+                minus += list.get(i).operation.getSumma();
+            }
+        }
+        models = new ArrayList<>();
+        models.add(new ModelCard(R.drawable.left_pointing_arrow,"Мне должны",plus+""));
+        models.add(new ModelCard(R.drawable.red_arrow,"Я должен",minus+""));
+        pagerAdapters = new PagerAdapters(models,this,list);
+        viewPager.setAdapter(pagerAdapters);
+        adapterCard = new AdapterCard(models,this);
+        viewPagerCard.setAdapter(adapterCard);
+
         viewPagerCard.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
-
             @Override
             public void onPageSelected(int i) {
                 viewPager.setCurrentItem(i,true);
@@ -76,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onPageScrollStateChanged(int i) {
-
             }
         });
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -95,17 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
-
-    }
-
-    public void loadCardView(List<OperationWithDebtors> list){
-        models = new ArrayList<>();
-        models.add(new ModelCard(R.drawable.left_pointing_arrow,"Мне должны","11568.45"));
-        models.add(new ModelCard(R.drawable.red_arrow,"Я должен","1234.45"));
-        pagerAdapters = new PagerAdapters(models,this,list);
-        viewPager.setAdapter(pagerAdapters);
-        adapterCard = new AdapterCard(models,this);
-        viewPagerCard.setAdapter(adapterCard);
+        viewPagerCard.setCurrentItem(0);
     }
 
     public void showList(List<OperationWithDebtors> list){

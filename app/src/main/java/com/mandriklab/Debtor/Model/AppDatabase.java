@@ -10,6 +10,7 @@ import android.content.Context;
 import com.mandriklab.Debtor.Model.DAO.DebtorsDao;
 import com.mandriklab.Debtor.Model.DAO.OperationDao;
 import com.mandriklab.Debtor.Model.Entity.Debtors;
+import com.mandriklab.Debtor.Model.Entity.Operation;
 
 
 @Database(entities = {Debtors.class, Operation.class}, version = 1)
@@ -28,11 +29,16 @@ public abstract class AppDatabase extends RoomDatabase {
                 public void onCreate (SupportSQLiteDatabase database) {
                     database.beginTransaction();
                     try {
-                      //  database.execSQL("INSERT INTO 'site' (ids, nameS, address,isShowS) VALUES (0,'Sectret','Secret',0)");
-                       // database.execSQL("INSERT INTO 'groupsites' (id, name, isShow,isDelete) VALUES (0,'All',0,0)");
-                        //database.setTransactionSuccessful();
+                        database.execSQL("INSERT INTO 'debtors' (idDebtor, fullName, number,address) VALUES (1,'Юрий Гончарик','+375293083345','ул.Залупкина д 5')");
+                        database.execSQL("INSERT INTO 'operation' (idOperation, idDebtorOperation, typeOperation,summa,dateOperation,lastDate) VALUES (1,1,0,11234.65,1564617600000,1565616619000)");
+                        database.execSQL("INSERT INTO 'operation' (idOperation, idDebtorOperation, typeOperation,summa,dateOperation,lastDate) VALUES (2,1,1,-17567,1565271019000,1565616619000)");
+                        database.execSQL("INSERT INTO 'operation' (idOperation, idDebtorOperation, typeOperation,summa,dateOperation,lastDate) VALUES (3,1,0,15678.32,1564617600000,1565616619000)");
+                        database.execSQL("INSERT INTO 'operation' (idOperation, idDebtorOperation, typeOperation,summa,dateOperation,lastDate) VALUES (4,1,1,-23456.54,1565271019000,1565616619000)");
+                        database.execSQL("INSERT INTO 'operation' (idOperation, idDebtorOperation, typeOperation,summa,dateOperation,lastDate) VALUES (5,1,0,12334.05,1564617600000,1565616619000)");
+
+                        database.setTransactionSuccessful();
                     } finally {
-                        //database.endTransaction();
+                        database.endTransaction();
                     }
                 }
                 public void onOpen (SupportSQLiteDatabase db) {
